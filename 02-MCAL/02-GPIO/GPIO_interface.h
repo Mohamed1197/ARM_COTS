@@ -2,7 +2,7 @@
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
 /**************** Date    :        27/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :          1.1             ********************/
+/**************** Version :          1.2             ********************/
 /************************************************************************/
 
 #ifndef GPIO_INTERFACE_H
@@ -56,18 +56,25 @@ void MGPIO_voidSetPortDirectionRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u3
 /*================================================================================================*/
 /**	Function Name	: MGPIO_voidSetPortDirectionRegister.						   		         **/
 /**	Return Type		: void.					   		   		                                     **/
-/**	Arguments		: Port Number , Pin Type(High/Low Pins) , Mode of the whole Port.            **/
+/**	Arguments		: Port Number , Pin Type(High/Low Pins) , Mode of Half the Port.             **/
 /**	Functionality	: Setting the direction of specific Port(HIGH/LOW)Pins Register at run time. **/
 /*================================================================================================*/
 
-void MGPIO_voidSetPortValueRegister(u8 Copy_u8PortID ,u16 Copy_u16value );
+void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u16 Copy_u16value );
 /*================================================================================================*/
-/**	Function Name	: MGPIO_voidSetPortValueRegister.						   		             **/
+/**	Function Name	: MGPIO_voidSetHalfPortValueRegister.						   		         **/
 /**	Return Type		: void.					   		   		                                     **/
-/**	Arguments		: Port Number , Value of the whole Port.                                     **/
-/**	Functionality	: Setting the Value of specific Port Register at run time.                   **/
+/**	Arguments		: Port Number , Pin Type(High/Low Pins) , Value of Half the Port.            **/
+/**	Functionality	: Setting the Value of specific Half Port(HIGH/LOW)Pins Register at run time.**/
 /*================================================================================================*/
 
+void MGPIO_voidSetFullPortValueRegister(u8 Copy_u8PortID , u16 Copy_u16value );
+/*================================================================================================*/
+/**	Function Name	: MGPIO_voidSetFullPortValueRegister.						   		         **/
+/**	Return Type		: void.					   		   		                                     **/
+/**	Arguments		: Port Number , Value of the whole Port.                                     **/
+/**	Functionality	: Setting the Value of specific Half Port(HIGH/LOW)Pins Register at run time.**/
+/*================================================================================================*/
 
 /*################################################################################################*/
 
