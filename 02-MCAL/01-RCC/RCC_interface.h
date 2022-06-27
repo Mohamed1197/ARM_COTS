@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :       18/06/2022         ********************/
+/**************** Date    :       27/06/2022         ********************/
 /**************** SWC     :          RCC             ********************/
-/**************** Version :          1.0             ********************/
+/**************** Version :          1.1             ********************/
 /************************************************************************/
 
 #ifndef RCC_INTERFACE_H
@@ -14,7 +14,7 @@
 /*                      Prototypes of the RCC driver                     */
 /*************************************************************************/
 
-void RCC_voidInitSysClock(void);
+void MRCC_voidInitSysClock(void);
 /*================================================================================================*/
 /**	Function Name	: RCC_voidInitSysClock.		         				    	                 **/
 /**	Return Type		: void.					   		   		                                     **/
@@ -22,7 +22,7 @@ void RCC_voidInitSysClock(void);
 /**	Functionality	: Initializing the System Clock at run time.	                             **/
 /*================================================================================================*/
 
-void RCC_voidEnableClock (u8 Copy_u8BusId , u8 Copy_u8PeripheralId);
+void MRCC_voidEnableClock (u8 Copy_u8BusId , u8 Copy_u8PeripheralId);
 /*================================================================================================*/
 /**	Function Name	: RCC_voidEnableClock.		         				    	                 **/
 /**	Return Type		: void.					   		   		                                     **/
@@ -30,7 +30,7 @@ void RCC_voidEnableClock (u8 Copy_u8BusId , u8 Copy_u8PeripheralId);
 /**	Functionality	: Enabling Specific Peripheral Clock at run time.	                         **/
 /*================================================================================================*/
 
-void RCC_voidDisableClock(u8 Copy_u8BusId , u8 Copy_u8PeripheralId);
+void MRCC_voidDisableClock(u8 Copy_u8BusId , u8 Copy_u8PeripheralId);
 /*================================================================================================*/
 /**	Function Name	: RCC_voidDisableClock.		         				    	                 **/
 /**	Return Type		: void.					   		   		                                     **/

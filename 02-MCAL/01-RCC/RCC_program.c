@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :       18/06/2022         ********************/
+/**************** Date    :       27/06/2022         ********************/
 /**************** SWC     :          RCC             ********************/
-/**************** Version :          1.0             ********************/
+/**************** Version :          1.1             ********************/
 /************************************************************************/
 
 
@@ -31,7 +31,7 @@
 /*************************************************************************/
 /*                  Initialize System Clock Function                     */
 /*************************************************************************/
-void RCC_voidInitSysClock(void)
+void MRCC_voidInitSysClock(void)
 {
     	/* Selecting System Clock Source */
 	
@@ -337,7 +337,7 @@ void RCC_voidInitSysClock(void)
 /*************************************************************************/
 /*                  Enable Peripheral Clock Function                     */
 /*************************************************************************/
-void RCC_voidEnableClock(u8 Copy_u8BusId , u8 Copy_u8PeripheralId)
+void MRCC_voidEnableClock(u8 Copy_u8BusId , u8 Copy_u8PeripheralId)
 {
     if (Copy_u8PeripheralId <=31 )
     {
@@ -359,7 +359,7 @@ void RCC_voidEnableClock(u8 Copy_u8BusId , u8 Copy_u8PeripheralId)
 /*************************************************************************/
 /*                  Disable Peripheral Clock Function                    */
 /*************************************************************************/
-void RCC_voidDisableClock(u8 Copy_u8BusId , u8 Copy_u8PeripheralId)
+void MRCC_voidDisableClock(u8 Copy_u8BusId , u8 Copy_u8PeripheralId)
 {
     if (Copy_u8PeripheralId <=31 )
     {
