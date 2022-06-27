@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :        25/06/2022        ********************/
+/**************** Date    :        27/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.0            ********************/
+/**************** Version :           1.1            ********************/
 /************************************************************************/
 
 /*************************************************************************/
@@ -460,7 +460,7 @@ void MGPIO_voidSetPortDirectionRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u3
 /*************************************************************************/
 /*                   Set Port Register Value Function                    */
 /*************************************************************************/
-void MGPIO_voidSetPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u16 Copy_u16value )
+void MGPIO_voidSetPortValueRegister(u8 Copy_u8PortID ,u16 Copy_u16value )
 {
 	/*       Range Check PortID and PinID        */
 	if(Copy_u8PortID <= GPIO_u8_PORTC)
@@ -468,52 +468,20 @@ void MGPIO_voidSetPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u16 Co
 		switch(Copy_u8PortID)
 		{
 		case GPIO_u8_PORTA:
-		     /* Check if Pin is from GPIO_u8_PIN0 to GPIO_u8_PIN7 (LOW pins) */
-			 if(Copy_u8PinType == GPIO_u8_LOW_PINS)
-			 {
-			      /* Reset PortA From Pin0 to Pin7 */
-				 GPIOA_ODR &= ~(0b0000000011111111) ;
+			      /* Reset PortA From Pin0 to Pin15 */
+				 GPIOA_ODR &= ~(0xFFFFFFFF)        ;
 		         GPIOA_ODR |=  (Copy_u16value << 0);
-			 }
-		     /* else if Pin is from GPIO_u8_PIN8 to GPIO_u8_PIN15 (HIGH pins) */
-			 else if(Copy_u8PinType == GPIO_u8_HIGH_PINS)
-			 {
-		      /* Reset PortA From Pin8 to Pin15 */
-				 GPIOA_ODR &= ~(0b1111111100000000) ;
-				 GPIOA_ODR |=  (Copy_u16value << 8);
-		     }
 		    break;
 		case GPIO_u8_PORTB:
-		     /* Check if Pin is from GPIO_u8_PIN0 to GPIO_u8_PIN7 (LOW pins) */
-			 if(Copy_u8PinType == GPIO_u8_LOW_PINS)
-			 {
-			      /* Reset PortA From Pin0 to Pin7 */
-				 GPIOB_ODR &= ~(0b0000000011111111) ;
+			      /* Reset PortB From Pin0 to Pin15 */
+				 GPIOB_ODR &= ~(0xFFFFFFFF)        ;
 		         GPIOB_ODR |=  (Copy_u16value << 0);
-			 }
-		     /* else if Pin is from GPIO_u8_PIN8 to GPIO_u8_PIN15 (HIGH pins) */
-			 else if(Copy_u8PinType == GPIO_u8_HIGH_PINS)
-			 {
-		      /* Reset PortA From Pin8 to Pin15 */
-				 GPIOB_ODR &= ~(0b1111111100000000) ;
-				 GPIOB_ODR |=  (Copy_u16value << 8);
-		     }
 		    break;
 		case GPIO_u8_PORTC:
-		     /* Check if Pin is from GPIO_u8_PIN0 to GPIO_u8_PIN7 (LOW pins) */
-			 if(Copy_u8PinType == GPIO_u8_LOW_PINS)
-			 {
-			      /* Reset PortA From Pin0 to Pin7 */
-				 GPIOC_ODR &= ~(0b0000000011111111) ;
+
+			      /* Reset PortC From Pin0 to Pin15 */
+				 GPIOC_ODR &= ~(0xFFFFFFFF)        ;
 		         GPIOC_ODR |=  (Copy_u16value << 0);
-			 }
-		     /* else if Pin is from GPIO_u8_PIN8 to GPIO_u8_PIN15 (HIGH pins) */
-			 else if(Copy_u8PinType == GPIO_u8_HIGH_PINS)
-			 {
-		      /* Reset PortA From Pin8 to Pin15 */
-				 GPIOC_ODR &= ~(0b1111111100000000) ;
-				 GPIOC_ODR |=  (Copy_u16value << 8);
-		     }
 		    break;
 		}
 	}

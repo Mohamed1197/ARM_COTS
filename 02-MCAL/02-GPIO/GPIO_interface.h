@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :        25/06/2022        ********************/
+/**************** Date    :        27/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :          1.0             ********************/
+/**************** Version :          1.1             ********************/
 /************************************************************************/
 
 #ifndef GPIO_INTERFACE_H
@@ -60,12 +60,12 @@ void MGPIO_voidSetPortDirectionRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u3
 /**	Functionality	: Setting the direction of specific Port(HIGH/LOW)Pins Register at run time. **/
 /*================================================================================================*/
 
-void MGPIO_voidSetPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u16 Copy_u16value );
+void MGPIO_voidSetPortValueRegister(u8 Copy_u8PortID ,u16 Copy_u16value );
 /*================================================================================================*/
 /**	Function Name	: MGPIO_voidSetPortValueRegister.						   		             **/
 /**	Return Type		: void.					   		   		                                     **/
-/**	Arguments		: Port Number , Pin Type(High/Low Pins) , Value of the whole Port.           **/
-/**	Functionality	: Setting the Value of specific Port(HIGH/LOW)Pins Register at run time.     **/
+/**	Arguments		: Port Number , Value of the whole Port.                                     **/
+/**	Functionality	: Setting the Value of specific Port Register at run time.                   **/
 /*================================================================================================*/
 
 
