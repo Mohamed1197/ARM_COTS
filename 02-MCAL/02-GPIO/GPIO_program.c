@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :        27/06/2022        ********************/
+/**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.2            ********************/
+/**************** Version :           1.3            ********************/
 /************************************************************************/
 
 /*************************************************************************/
@@ -110,14 +110,24 @@ void MGPIO_voidSetPinValue(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8Value)
 		{
 			case GPIO_u8_PORTA:
 	    	if(Copy_u8Value == GPIO_u8_HIGH)
-	    	{
+	    	{	// Using ODR or BSRR Register (BSRR is Faster)
+				#if (USE_OUTPUT_REG_ONSET == ODR ) 
 	    		SET_BIT(GPIOA_ODR , Copy_u8PinID);
-	    		//GPIOA_BSRR = (1 << Copy_u8PinID);
+				#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    		GPIOA_BSRR = (1 << Copy_u8PinID);
+				#else
+					#error "Wrong SET Register Macro Selection"
+				#endif	
 	    	}
 	    	else if(Copy_u8Value == GPIO_u8_LOW)
-	    	{
+	    	{	// Using ODR or BRR Register (BRR is Faster)
+				#if (USE_OUTPUT_REG_ONCLR == ODR )
 	    		CLR_BIT(GPIOA_ODR , Copy_u8PinID);
-	    		//GPIOA_BRR = (1 << Copy_u8PinID);
+				#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    		GPIOA_BRR = (1 << Copy_u8PinID);
+				#else
+					#error "Wrong CLR Register Macro Selection"
+				#endif
 	    	}
 	    	else
 	    	{
@@ -126,14 +136,24 @@ void MGPIO_voidSetPinValue(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8Value)
 			break;
 			case GPIO_u8_PORTB:
 	    	if(Copy_u8Value == GPIO_u8_HIGH)
-	    	{
+	    	{	// Using ODR or BSRR Register (BSRR is Faster)
+				#if (USE_OUTPUT_REG_ONSET == ODR )
 	    		SET_BIT(GPIOB_ODR , Copy_u8PinID);
-	    		//GPIOB_BSRR = (1 << Copy_u8PinID);
+				#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    		GPIOB_BSRR = (1 << Copy_u8PinID);
+				#else
+					#error "Wrong SET Register Macro Selection"
+				#endif	
 	    	}
 	    	else if(Copy_u8Value == GPIO_u8_LOW)
-	    	{
+	    	{	// Using ODR or BRR Register (BRR is Faster)
+				#if (USE_OUTPUT_REG_ONCLR == ODR )
 	    		CLR_BIT(GPIOB_ODR , Copy_u8PinID);
-	    		//GPIOB_BRR = (1 << Copy_u8PinID);
+				#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    		GPIOB_BRR = (1 << Copy_u8PinID);
+				#else
+					#error "Wrong CLR Register Macro Selection"
+				#endif
 	    	}
 	    	else
 	    	{
@@ -142,14 +162,24 @@ void MGPIO_voidSetPinValue(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8Value)
 			break;
 			case GPIO_u8_PORTC:
 	    	if(Copy_u8Value == GPIO_u8_HIGH)
-	    	{
+	    	{	// Using ODR or BSRR Register (BSRR is Faster)
+				#if (USE_OUTPUT_REG_ONSET == ODR )
 	    		SET_BIT(GPIOC_ODR , Copy_u8PinID);
-	    		//GPIOC_BSRR = (1 << Copy_u8PinID);
+				#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    		GPIOC_BSRR = (1 << Copy_u8PinID);
+				#else
+					#error "Wrong SET Register Macro Selection"
+				#endif
 	    	}
 	    	else if(Copy_u8Value == GPIO_u8_LOW)
-	    	{
+	    	{	// Using ODR or BRR Register (BRR is Faster)
+				#if (USE_OUTPUT_REG_ONCLR == ODR )
 	    		CLR_BIT(GPIOC_ODR , Copy_u8PinID);
-	    		//GPIOC_BSRR = (1 << Copy_u8PinID);
+				#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    		GPIOC_BRR = (1 << Copy_u8PinID);
+				#else
+					#error "Wrong CLR Register Macro Selection"
+				#endif
 	    	}
 	    	else
 	    	{
@@ -294,13 +324,23 @@ void MGPIO_voidSetPortValue(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8valu
 				 {
 					 switch(Copy_u8value)
 					 {
-					 case GPIO_u8_HIGH:
-						 //GPIOA_ODR |= 0x000000FF;
-						 GPIOA_BSRR = 0x000000FF;
+					 case GPIO_u8_HIGH: 	// Using ODR or BSRR Register (BSRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONSET == ODR )
+							GPIOA_ODR |= 0x000000FF;
+							#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    					GPIOA_BSRR = 0x000000FF;
+							#else
+								#error "Wrong SET Register Macro Selection"
+							#endif	
 						 break;
-					 case GPIO_u8_LOW:
-						 //GPIOA_ODR &= ~(0x000000FF);
-						 GPIOA_BRR = 0x000000FF;
+					 case GPIO_u8_LOW:		// Using ODR or BRR Register (BRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONCLR == ODR )
+	    					GPIOA_ODR &= ~(0x000000FF);
+							#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    					GPIOA_BRR = 0x000000FF;
+							#else
+								#error "Wrong CLR Register Macro Selection"
+							#endif
 						 break;
 					 }
 				 }
@@ -309,13 +349,23 @@ void MGPIO_voidSetPortValue(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8valu
 				 {
 					 switch(Copy_u8value)
 					 {
-					 case GPIO_u8_HIGH:
-						 //GPIOA_ODR |= 0x0000FF00;
-						 GPIOA_BSRR = 0x0000FF00;
+					 case GPIO_u8_HIGH:		// Using ODR or BSRR Register (BSRR is Faster)
+							#if (USE_OUTPUT_REG_ONSET == ODR )
+	    					GPIOA_ODR |= 0x0000FF00;
+							#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    					GPIOA_BSRR = 0x0000FF00;
+							#else
+								#error "Wrong SET Register Macro Selection"
+							#endif
 						 break;
-					 case GPIO_u8_LOW:
-						 //GPIOA_ODR &= ~(0x0000FF00);
-						 GPIOA_BRR = 0x0000FF00;
+					 case GPIO_u8_LOW:		// Using ODR or BRR Register (BRR is Faster)
+					        #if (USE_OUTPUT_REG_ONCLR == ODR )
+	    					GPIOA_ODR &= ~(0x0000FF00);
+							#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    					GPIOA_BRR = 0x0000FF00;
+							#else
+								#error "Wrong CLR Register Macro Selection"
+							#endif		
 						 break;
 					 }
 			     }
@@ -326,13 +376,23 @@ void MGPIO_voidSetPortValue(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8valu
 				 {
 					 switch(Copy_u8value)
 					 {
-					 case GPIO_u8_HIGH:
-						// GPIOB_ODR |= 0x000000FF;
-						 GPIOB_BSRR = 0x000000FF;
+					 case GPIO_u8_HIGH:		// Using ODR or BSRR Register (BSRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONSET == ODR )
+	    					GPIOB_ODR |= 0x000000FF;
+							#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    					GPIOB_BSRR = 0x000000FF;
+							#else
+								#error "Wrong SET Register Macro Selection"
+							#endif
 						 break;
-					 case GPIO_u8_LOW:
-						 //GPIOB_ODR &= ~(0x000000FF);
-						 GPIOB_BRR = 0x000000FF;
+					 case GPIO_u8_LOW:		// Using ODR or BRR Register (BRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONCLR == ODR )
+	    					GPIOB_ODR &= ~(0x000000FF);
+							#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    					GPIOB_BRR = 0x000000FF;
+							#else
+								#error "Wrong CLR Register Macro Selection"
+							#endif	
 						 break;
 					 }
 				 }
@@ -341,13 +401,23 @@ void MGPIO_voidSetPortValue(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8valu
 				 {
 					 switch(Copy_u8value)
 					 {
-					 case GPIO_u8_HIGH:
-						 //GPIOB_ODR |= 0x0000FF00;
-						 GPIOB_BSRR = 0x0000FF00;
+					 case GPIO_u8_HIGH:		// Using ODR or BSRR Register (BSRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONSET == ODR )
+	    					GPIOB_ODR |= 0x0000FF00;
+							#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    					GPIOB_BSRR = 0x0000FF00;
+							#else
+								#error "Wrong SET Register Macro Selection"
+							#endif
 						 break;
-					 case GPIO_u8_LOW:
-						 //GPIOB_ODR &= ~(0x0000FF00);
-						 GPIOB_BRR = 0x0000FF00;
+					 case GPIO_u8_LOW:		// Using ODR or BRR Register (BRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONCLR == ODR )
+	    					GPIOB_ODR &= ~(0x0000FF00);
+							#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    					GPIOB_BRR = 0x0000FF00;
+							#else
+								#error "Wrong CLR Register Macro Selection"
+							#endif
 						 break;
 					 }
 			     }
@@ -358,13 +428,23 @@ void MGPIO_voidSetPortValue(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8valu
 				 {
 					 switch(Copy_u8value)
 					 {
-					 case GPIO_u8_HIGH:
-						 //GPIOC_ODR |= 0x000000FF;
-						 GPIOC_BSRR = 0x000000FF;
+					 case GPIO_u8_HIGH:		// Using ODR or BSRR Register (BSRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONSET == ODR )
+	    					GPIOC_ODR |= 0x000000FF;
+							#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    					GPIOC_BSRR = 0x000000FF;
+							#else
+								#error "Wrong SET Register Macro Selection"
+							#endif
 						 break;
-					 case GPIO_u8_LOW:
-						 //GPIOC_ODR &= ~(0x000000FF);
-						 GPIOC_BRR = 0x000000FF;
+					 case GPIO_u8_LOW:		// Using ODR or BRR Register (BRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONCLR == ODR )
+	    					GPIOC_ODR &= ~(0x000000FF);
+							#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    					GPIOC_BRR = 0x000000FF;
+							#else
+								#error "Wrong CLR Register Macro Selection"
+							#endif
 						 break;
 					 }
 				 }
@@ -373,13 +453,23 @@ void MGPIO_voidSetPortValue(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8valu
 				 {
 					 switch(Copy_u8value)
 					 {
-					 case GPIO_u8_HIGH:
-						 //GPIOC_ODR |= 0x0000FF00;
-						 GPIOC_BSRR = 0x0000FF00;
+					 case GPIO_u8_HIGH:		// Using ODR or BSRR Register (BSRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONSET == ODR )
+	    					GPIOC_ODR |= 0x0000FF00;
+							#elif (USE_OUTPUT_REG_ONSET == BSRR )
+	    					GPIOC_BSRR = 0x0000FF00;
+							#else
+								#error "Wrong SET Register Macro Selection"
+							#endif
 						 break;
-					 case GPIO_u8_LOW:
-						 //GPIOC_ODR &= ~(0x0000FF00);
-						 GPIOC_BRR = 0x0000FF00;
+					 case GPIO_u8_LOW:		// Using ODR or BRR Register (BRR is Faster)
+					 		#if (USE_OUTPUT_REG_ONCLR == ODR )
+	    					GPIOC_ODR &= ~(0x0000FF00);
+							#elif (USE_OUTPUT_REG_ONCLR == BRR )
+	    					GPIOC_BRR = 0x0000FF00;
+							#else
+								#error "Wrong CLR Register Macro Selection"
+							#endif
 						 break;
 					 }
 			     }
@@ -460,7 +550,7 @@ void MGPIO_voidSetPortDirectionRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u3
 /*************************************************************************/
 /*              Set Half Port Register Value Function                    */
 /*************************************************************************/
-void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u16 Copy_u16value )
+void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8value )
 {
 	/*       Range Check PortID and PinID        */
 	if(Copy_u8PortID <= GPIO_u8_PORTC)
@@ -472,15 +562,29 @@ void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u1
 			 if(Copy_u8PinType == GPIO_u8_LOW_PINS)
 			 {
 			      /* Reset PortA From Pin0 to Pin7 */
-				 GPIOA_ODR &= ~(0b0000000011111111) ;
-		         GPIOA_ODR |=  (Copy_u16value << 0);
+				  	#if (USE_OUTPUT_REG_ONSET == ODR )
+	    			GPIOA_ODR &= ~(0b0000000011111111);             
+		            GPIOA_ODR |=  (Copy_u8value << 0); 
+					#elif (USE_OUTPUT_REG_ONSET == BSRR )
+   					GPIOA_BRR  = 0x000000FF;
+					GPIOA_BSRR = (Copy_u8value << 0);
+					#else
+						#error "Wrong SET Register Macro Selection"
+					#endif		 
 			 }
 		     /* else if Pin is from GPIO_u8_PIN8 to GPIO_u8_PIN15 (HIGH pins) */
 			 else if(Copy_u8PinType == GPIO_u8_HIGH_PINS)
 			 {
 		      /* Reset PortA From Pin8 to Pin15 */
-				 GPIOA_ODR &= ~(0b1111111100000000) ;
-				 GPIOA_ODR |=  (Copy_u16value << 8);
+			  		#if (USE_OUTPUT_REG_ONSET == ODR )
+	    			GPIOA_ODR &= ~(0b1111111100000000);
+				    GPIOA_ODR |=  (Copy_u8value << 8);
+					#elif (USE_OUTPUT_REG_ONSET == BSRR )
+   					GPIOA_BRR  = 0x0000FF00;
+					GPIOA_BSRR = (Copy_u8value << 8);
+					#else
+						#error "Wrong SET Register Macro Selection"
+					#endif	
 		     }
 		    break;
 		case GPIO_u8_PORTB:
@@ -488,15 +592,29 @@ void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u1
 			 if(Copy_u8PinType == GPIO_u8_LOW_PINS)
 			 {
 			      /* Reset PortB From Pin0 to Pin7 */
-				 GPIOB_ODR &= ~(0b0000000011111111) ;
-		         GPIOB_ODR |=  (Copy_u16value << 0);
+				 	#if (USE_OUTPUT_REG_ONSET == ODR )
+	    			GPIOB_ODR &= ~(0b0000000011111111) ;
+		        	GPIOB_ODR |=  (Copy_u8value << 0);
+					#elif (USE_OUTPUT_REG_ONSET == BSRR )
+   					GPIOB_BRR  = 0x000000FF;
+					GPIOB_BSRR = (Copy_u8value << 0);
+					#else
+						#error "Wrong SET Register Macro Selection"
+					#endif	
 			 }
 		     /* else if Pin is from GPIO_u8_PIN8 to GPIO_u8_PIN15 (HIGH pins) */
 			 else if(Copy_u8PinType == GPIO_u8_HIGH_PINS)
 			 {
 		      /* Reset PortB From Pin8 to Pin15 */
-				 GPIOB_ODR &= ~(0b1111111100000000) ;
-				 GPIOB_ODR |=  (Copy_u16value << 8);
+			  		#if (USE_OUTPUT_REG_ONSET == ODR )
+	    			GPIOB_ODR &= ~(0b1111111100000000) ;
+					GPIOB_ODR |=  (Copy_u8value << 8);
+					#elif (USE_OUTPUT_REG_ONSET == BSRR )
+   					GPIOB_BRR  = 0x0000FF00;
+					GPIOB_BSRR = (Copy_u8value << 8);
+					#else
+						#error "Wrong SET Register Macro Selection"
+					#endif	 
 		     }
 		    break;
 		case GPIO_u8_PORTC:
@@ -504,15 +622,30 @@ void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u1
 			 if(Copy_u8PinType == GPIO_u8_LOW_PINS)
 			 {
 			      /* Reset PortC From Pin0 to Pin7 */
-				 GPIOC_ODR &= ~(0b0000000011111111) ;
-		         GPIOC_ODR |=  (Copy_u16value << 0);
+				  	#if (USE_OUTPUT_REG_ONSET == ODR )
+	    			GPIOC_ODR &= ~(0b0000000011111111) ;
+		       	 	GPIOC_ODR |=  (Copy_u8value << 0);
+					#elif (USE_OUTPUT_REG_ONSET == BSRR )
+   					GPIOC_BRR  = 0x000000FF;
+					GPIOC_BSRR = (Copy_u8value << 0);
+					#else
+						#error "Wrong SET Register Macro Selection"
+					#endif	
+				 
 			 }
 		     /* else if Pin is from GPIO_u8_PIN8 to GPIO_u8_PIN15 (HIGH pins) */
 			 else if(Copy_u8PinType == GPIO_u8_HIGH_PINS)
 			 {
 		      /* Reset PortC From Pin8 to Pin15 */
-				 GPIOC_ODR &= ~(0b1111111100000000) ;
-				 GPIOC_ODR |=  (Copy_u16value << 8);
+			  		#if (USE_OUTPUT_REG_ONSET == ODR )
+	    			GPIOC_ODR &= ~(0b1111111100000000) ;
+				 	GPIOC_ODR |=  (Copy_u8value << 8);
+					#elif (USE_OUTPUT_REG_ONSET == BSRR )
+   					GPIOC_BRR  = 0x0000FF00;
+					GPIOC_BSRR = (Copy_u8value << 8);
+					#else
+						#error "Wrong SET Register Macro Selection"
+					#endif
 		     }
 		    break;
 		}
@@ -531,21 +664,18 @@ void MGPIO_voidSetFullPortValueRegister(u8 Copy_u8PortID , u16 Copy_u16value )
 		switch(Copy_u8PortID)
 		{
 		case GPIO_u8_PORTA:
-			      /* Reset PortA From Pin0 to Pin15 */
-				 GPIOA_ODR &= ~(0xFFFFFFFF)        ;
-		         GPIOA_ODR |=  (Copy_u16value << 0);
+			      /* Write on whole PortA From Pin0 to Pin15 */
+		         GPIOA_ODR =  Copy_u16value ;
 		    break;
 			
 		case GPIO_u8_PORTB:
-			      /* Reset PortB From Pin0 to Pin15 */
-				 GPIOB_ODR &= ~(0xFFFFFFFF)        ;
-		         GPIOB_ODR |=  (Copy_u16value << 0);
+			      /* Write on whole PortB From Pin0 to Pin15 */
+		         GPIOB_ODR =  Copy_u16value ;
 		    break;
 			
 		case GPIO_u8_PORTC:
-			      /* Reset PortC From Pin0 to Pin15 */
-				 GPIOC_ODR &= ~(0xFFFFFFFF)        ;
-		         GPIOC_ODR |=  (Copy_u16value << 0);
+			      /* Write on whole PortC From Pin0 to Pin15 */
+		         GPIOC_ODR =  Copy_u16value ;
 		    break;
 		}
 	}
