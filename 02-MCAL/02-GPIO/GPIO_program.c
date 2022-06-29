@@ -2,7 +2,7 @@
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
 /**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.4            ********************/
+/**************** Version :           1.5            ********************/
 /************************************************************************/
 
 /*************************************************************************/
@@ -691,21 +691,75 @@ void MGPIO_voidSetFullPortValueRegister(u8 Copy_u8PortID , u16 Copy_u16value )
 /*************************************************************************/
 void MGPIO_voidSetInputPullUpPullDn(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8InputType)
 {
-	switch (Copy_u8InputType)
+	if((Copy_u8PortID <= GPIO_u8_PORTC) && (Copy_u8PinID <= GPIO_u8_PIN15))
 	{
-	case GPIO_u8_PULL_UP:
-		MGPIO_voidSetPinValue (Copy_u8PortID , Copy_u8PinID , GPIO_u8_HIGH);
+		switch (Copy_u8InputType)
+		{
+		case GPIO_u8_PULL_UP:
+			MGPIO_voidSetPinValue (Copy_u8PortID , Copy_u8PinID , GPIO_u8_HIGH);
+			break;
+
+		case GPIO_u8_PULL_DOWN:
+			MGPIO_voidSetPinValue (Copy_u8PortID , Copy_u8PinID ,GPIO_u8_LOW);
+			break;
+		default:
+			break;
+		}
+	}
+}
+/*#######################################################################*/
+
+
+/*************************************************************************/
+/*              Select Input PullUp or PullDown Function                 */
+/*************************************************************************/
+void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value )
+{
+	switch (Copy_u8PortID)
+	{
+	case GPIO_u8_PORTA:
+		/* Choosing pins to be locked in PORTA */
+		GPIOA_LCKR = Copy_u16value;
+		/* Applying the Lock Sequence to PORTA */
+		SET_BIT(GPIOA_LCKR , 16);  // Write 1
+		CLR_BIT(GPIOA_LCKR , 16);  // Write 0
+		SET_BIT(GPIOA_LCKR , 16);  // Write 1
+		GET_BIT(GPIOA_LCKR , 16);  // Read  0
+		GET_BIT(GPIOA_LCKR , 16);  // Read  1
 		break;
 
-	case GPIO_u8_PULL_DOWN:
-		MGPIO_voidSetPinValue (Copy_u8PortID , Copy_u8PinID ,GPIO_u8_LOW);
+	case GPIO_u8_PORTB:
+		/* Choosing pins to be locked in PORTA */
+		GPIOB_LCKR = Copy_u16value;
+		/* Applying the Lock Sequence to PORTA */
+		SET_BIT(GPIOB_LCKR , 16);  // Write 1
+		CLR_BIT(GPIOB_LCKR , 16);  // Write 0
+		SET_BIT(GPIOB_LCKR , 16);  // Write 1
+		GET_BIT(GPIOB_LCKR , 16);  // Read  0
+		GET_BIT(GPIOB_LCKR , 16);  // Read  1
 		break;
+
+	case GPIO_u8_PORTC:
+		/* Choosing pins to be locked in PORTA */
+		GPIOC_LCKR = Copy_u16value;
+		/* Applying the Lock Sequence to PORTA */
+		SET_BIT(GPIOC_LCKR , 16);  // Write 1
+		CLR_BIT(GPIOC_LCKR , 16);  // Write 0
+		SET_BIT(GPIOC_LCKR , 16);  // Write 1
+		GET_BIT(GPIOC_LCKR , 16);  // Read  0
+		GET_BIT(GPIOC_LCKR , 16);  // Read  1
+		break;		
+	
 	default:
 		break;
 	}
-	
 }
 /*#######################################################################*/
+
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/*XXXXX             END OF FUNCTIONS IMPLEMENTATION                XXXXXX*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
 
 

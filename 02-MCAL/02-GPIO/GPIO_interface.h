@@ -2,7 +2,7 @@
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
 /**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :          1.4             ********************/
+/**************** Version :          1.5             ********************/
 /************************************************************************/
 
 #ifndef GPIO_INTERFACE_H
@@ -82,6 +82,14 @@ void MGPIO_voidSetInputPullUpPullDn(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy
 /**	Return Type		: void.					   		   		                                     **/
 /**	Arguments		: Port Number , Pin Number and Input Type (PullUp or PullDown).	             **/
 /**	Functionality	: Setting the Input as pullup od pulldown of specific pin at run time.       **/
+/*================================================================================================*/
+
+void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value );
+/*================================================================================================*/
+/**	Function Name	: MGPIO_voidLockPortConfig.	            					   		         **/
+/**	Return Type		: void.					   		   		                                     **/
+/**	Arguments		: Port Number , Value of the whole Port you want to lock.                    **/
+/**	Functionality	: locking(Freezing) the configuration of the port bits at run time.          **/
 /*================================================================================================*/
 
 /*################################################################################################*/
