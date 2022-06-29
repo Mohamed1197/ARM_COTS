@@ -2,7 +2,7 @@
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
 /**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :          1.5             ********************/
+/**************** Version :          1.5.1           ********************/
 /************************************************************************/
 
 #ifndef GPIO_INTERFACE_H
@@ -60,7 +60,7 @@ void MGPIO_voidSetPortDirectionRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u3
 /**	Functionality	: Setting the direction of specific Port(HIGH/LOW)Pins Register at run time. **/
 /*================================================================================================*/
 
-void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u16 Copy_u16value );
+void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8 Copy_u8value );
 /*================================================================================================*/
 /**	Function Name	: MGPIO_voidSetHalfPortValueRegister.						   		         **/
 /**	Return Type		: void.					   		   		                                     **/

@@ -2,7 +2,7 @@
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
 /**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.5            ********************/
+/**************** Version :           1.5.1          ********************/
 /************************************************************************/
 
 /*************************************************************************/
@@ -715,6 +715,7 @@ void MGPIO_voidSetInputPullUpPullDn(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy
 /*************************************************************************/
 void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value )
 {
+	u8 Local_u8Return ;
 	switch (Copy_u8PortID)
 	{
 	case GPIO_u8_PORTA:
@@ -724,8 +725,8 @@ void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value )
 		SET_BIT(GPIOA_LCKR , 16);  // Write 1
 		CLR_BIT(GPIOA_LCKR , 16);  // Write 0
 		SET_BIT(GPIOA_LCKR , 16);  // Write 1
-		GET_BIT(GPIOA_LCKR , 16);  // Read  0
-		GET_BIT(GPIOA_LCKR , 16);  // Read  1
+		Local_u8Return = GET_BIT(GPIOA_LCKR , 16);  // Read  0
+		Local_u8Return = GET_BIT(GPIOA_LCKR , 16);  // Read  1
 		break;
 
 	case GPIO_u8_PORTB:
@@ -735,8 +736,8 @@ void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value )
 		SET_BIT(GPIOB_LCKR , 16);  // Write 1
 		CLR_BIT(GPIOB_LCKR , 16);  // Write 0
 		SET_BIT(GPIOB_LCKR , 16);  // Write 1
-		GET_BIT(GPIOB_LCKR , 16);  // Read  0
-		GET_BIT(GPIOB_LCKR , 16);  // Read  1
+		Local_u8Return = GET_BIT(GPIOB_LCKR , 16);  // Read  0
+		Local_u8Return = GET_BIT(GPIOB_LCKR , 16);  // Read  1
 		break;
 
 	case GPIO_u8_PORTC:
@@ -746,8 +747,8 @@ void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value )
 		SET_BIT(GPIOC_LCKR , 16);  // Write 1
 		CLR_BIT(GPIOC_LCKR , 16);  // Write 0
 		SET_BIT(GPIOC_LCKR , 16);  // Write 1
-		GET_BIT(GPIOC_LCKR , 16);  // Read  0
-		GET_BIT(GPIOC_LCKR , 16);  // Read  1
+		Local_u8Return = GET_BIT(GPIOC_LCKR , 16);  // Read  0
+		Local_u8Return = GET_BIT(GPIOC_LCKR , 16);  // Read  1
 		break;		
 	
 	default:
