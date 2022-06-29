@@ -2,7 +2,7 @@
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
 /**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.3            ********************/
+/**************** Version :           1.4            ********************/
 /************************************************************************/
 
 /*************************************************************************/
@@ -652,6 +652,8 @@ void MGPIO_voidSetHalfPortValueRegister(u8 Copy_u8PortID , u8 Copy_u8PinType ,u8
 	}
 
 }
+/*#######################################################################*/
+
 
 /*************************************************************************/
 /*              Set FULL Port Register Value Function                    */
@@ -680,6 +682,28 @@ void MGPIO_voidSetFullPortValueRegister(u8 Copy_u8PortID , u16 Copy_u16value )
 		}
 	}
 
+}
+/*#######################################################################*/
+
+
+/*************************************************************************/
+/*              Select Input PullUp or PullDown Function                 */
+/*************************************************************************/
+void MGPIO_voidSetInputPullUpPullDn(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8InputType)
+{
+	switch (Copy_u8InputType)
+	{
+	case GPIO_u8_PULL_UP:
+		MGPIO_voidSetPinValue (Copy_u8PortID , Copy_u8PinID , GPIO_u8_HIGH);
+		break;
+
+	case GPIO_u8_PULL_DOWN:
+		MGPIO_voidSetPinValue (Copy_u8PortID , Copy_u8PinID ,GPIO_u8_LOW);
+		break;
+	default:
+		break;
+	}
+	
 }
 /*#######################################################################*/
 

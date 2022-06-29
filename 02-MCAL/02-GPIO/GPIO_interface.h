@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :        27/06/2022        ********************/
+/**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :          1.2             ********************/
+/**************** Version :          1.4             ********************/
 /************************************************************************/
 
 #ifndef GPIO_INTERFACE_H
@@ -74,6 +74,14 @@ void MGPIO_voidSetFullPortValueRegister(u8 Copy_u8PortID , u16 Copy_u16value );
 /**	Return Type		: void.					   		   		                                     **/
 /**	Arguments		: Port Number , Value of the whole Port.                                     **/
 /**	Functionality	: Setting the Value of specific Half Port(HIGH/LOW)Pins Register at run time.**/
+/*================================================================================================*/
+
+void MGPIO_voidSetInputPullUpPullDn(u8 Copy_u8PortID , u8 Copy_u8PinID , u8 Copy_u8InputType);
+/*================================================================================================*/
+/**	Function Name	: MGPIO_voidSetInputPullUpPullDn.       		                             **/
+/**	Return Type		: void.					   		   		                                     **/
+/**	Arguments		: Port Number , Pin Number and Input Type (PullUp or PullDown).	             **/
+/**	Functionality	: Setting the Input as pullup od pulldown of specific pin at run time.       **/
 /*================================================================================================*/
 
 /*################################################################################################*/
@@ -151,6 +159,12 @@ void MGPIO_voidSetFullPortValueRegister(u8 Copy_u8PortID , u16 Copy_u16value );
 /*************************************************************************/
 #define GPIO_u8_HIGH_PINS            1
 #define GPIO_u8_LOW_PINS             0
+
+/*************************************************************************/
+/*              Macros for the Input Pins Pullup or Pulldown             */
+/*************************************************************************/
+#define GPIO_u8_PULL_UP               0
+#define GPIO_u8_PULL_DOWN             1
 
 /*################################################################################################*/
 
