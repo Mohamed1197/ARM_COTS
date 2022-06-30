@@ -2,7 +2,7 @@
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
 /**************** Date    :        29/06/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.5.1          ********************/
+/**************** Version :           1.5.2          ********************/
 /************************************************************************/
 
 /*************************************************************************/
@@ -730,9 +730,9 @@ void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value )
 		break;
 
 	case GPIO_u8_PORTB:
-		/* Choosing pins to be locked in PORTA */
+		/* Choosing pins to be locked in PORTB */
 		GPIOB_LCKR = Copy_u16value;
-		/* Applying the Lock Sequence to PORTA */
+		/* Applying the Lock Sequence to PORTB */
 		SET_BIT(GPIOB_LCKR , 16);  // Write 1
 		CLR_BIT(GPIOB_LCKR , 16);  // Write 0
 		SET_BIT(GPIOB_LCKR , 16);  // Write 1
@@ -741,9 +741,9 @@ void MGPIO_voidLockPortConfig(u8 Copy_u8PortID , u16 Copy_u16value )
 		break;
 
 	case GPIO_u8_PORTC:
-		/* Choosing pins to be locked in PORTA */
+		/* Choosing pins to be locked in PORTC */
 		GPIOC_LCKR = Copy_u16value;
-		/* Applying the Lock Sequence to PORTA */
+		/* Applying the Lock Sequence to PORTC */
 		SET_BIT(GPIOC_LCKR , 16);  // Write 1
 		CLR_BIT(GPIOC_LCKR , 16);  // Write 0
 		SET_BIT(GPIOC_LCKR , 16);  // Write 1
