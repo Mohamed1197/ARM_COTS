@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :        30/06/2022        ********************/
+/**************** Date    :        21/07/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.0            ********************/
+/**************** Version :           1.2            ********************/
 /************************************************************************/
 
 /*************************************************************************/
@@ -30,7 +30,7 @@
 /*************************************************************************/
 /*                Enable External Interrupt Function                     */
 /*************************************************************************/
-u8 MNVIC_u8EnableInterrupt (u8 Copy_u8IntNumber);
+u8 MNVIC_u8EnableInterrupt(u8 Copy_u8IntNumber);
 {
     u8 Local_u8_ErrorState = NOK ;
 
@@ -59,7 +59,7 @@ u8 MNVIC_u8EnableInterrupt (u8 Copy_u8IntNumber);
 /*************************************************************************/
 /*               Disable External Interrupt Function                     */
 /*************************************************************************/
-u8 MNVIC_u8DisableInterrupt (u8 Copy_u8IntNumber);
+u8 MNVIC_u8DisableInterrupt(u8 Copy_u8IntNumber);
 {
     u8 Local_u8_ErrorState = NOK ;
 
@@ -88,7 +88,7 @@ u8 MNVIC_u8DisableInterrupt (u8 Copy_u8IntNumber);
 /*************************************************************************/
 /*          Set External Interrupt Pending Flag Function                 */
 /*************************************************************************/
-u8 MNVIC_u8SetPendingFlag (u8 Copy_u8IntNumber);
+u8 MNVIC_u8SetPendingFlag(u8 Copy_u8IntNumber);
 {
     u8 Local_u8_ErrorState = NOK ;
 
@@ -117,7 +117,7 @@ u8 MNVIC_u8SetPendingFlag (u8 Copy_u8IntNumber);
 /*************************************************************************/
 /*        CLear External Interrupt Pending Flag Function                 */
 /*************************************************************************/
-u8 MNVIC_u8ClearPendingFlag (u8 Copy_u8IntNumber);
+u8 MNVIC_u8ClearPendingFlag(u8 Copy_u8IntNumber);
 {
     u8 Local_u8_ErrorState = NOK ;
 
@@ -146,7 +146,7 @@ u8 MNVIC_u8ClearPendingFlag (u8 Copy_u8IntNumber);
 /*************************************************************************/
 /*              Read Interrupt Active Flag Function                      */
 /*************************************************************************/
-u8 MNVIC_u8GetActiveFlag (u8 Copy_u8IntNumber , u8* Copy_pu8FlagResult);
+u8 MNVIC_u8GetActiveFlag(u8 Copy_u8IntNumber , u8* Copy_pu8FlagResult);
 {
     u8 Local_u8_ErrorState = NOK ;
 
@@ -169,6 +169,25 @@ u8 MNVIC_u8GetActiveFlag (u8 Copy_u8IntNumber , u8* Copy_pu8FlagResult);
 }
 /*#######################################################################*/
 
+
+/*************************************************************************/
+/*              Set Software Interrupt Priority Function                 */
+/*************************************************************************/
+u8 MNVIC_voidSetPriority(s8 Copy_s8IntID , u8 copy_u8GroupPriority , u8 copy_u8SubPriority , u32 copy_u8GroupandSub);
+{
+    u8 Local_u8_ErrorState = OK ;
+    /*   The Number we will shift with    */
+    u8 Local_u8Priority = copy_u8SubPriority | (copy_u8GroupPriority << ((copy_u32GroupandSub - 0x05FA0300 )/256)) ;
+  //  if((copy_u8GroupandSub == 0X05FA0300) && (copy_u8GroupPriority <= 15))
+    /*   Core peripheral        */
+
+    /*   external peripheral    */
+    if(Copy_s8IntID >= 0)
+    {
+        IPR[Copy_s8IntID] = Local_u8Priority << 4;
+    }
+    SCB_AIRCR = copy_u8SubPriority;
+}
 
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 /*XXXXX             END OF FUNCTIONS IMPLEMENTATION                XXXXXX*/

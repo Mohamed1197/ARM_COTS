@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :        30/06/2022        ********************/
+/**************** Date    :        21/07/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.1            ********************/
+/**************** Version :           1.2            ********************/
 /************************************************************************/
 
 #ifndef NVIC_INTERFACE_H
@@ -50,6 +50,14 @@ u8 MNVIC_u8GetActiveFlag (u8 Copy_u8IntNumber , u8* Copy_pu8FlagResult);
 /**	Return Type		: Error State.					   		   		                             **/
 /**	Arguments		: External Interrupt Number in the Vector Table and a pointer to the Result  **/
 /**	Functionality	: Set the Pending Interrupt Flag of the External Prepherals at run time.     **/
+/*================================================================================================*/
+
+u8 MNVIC_voidSetPriority(s8 Copy_s8IntID , u8 copy_u8GroupPriority , u8 copy_u8SubPriority , u32 copy_u8GroupandSub);
+/*================================================================================================*/
+/**	Function Name	: MNVIC_voidSetPriority.						    	                     **/
+/**	Return Type		: Error State.					   		   		                             **/
+/**	Arguments		: Interrupt ID , Group Priority , Sub Priority and (Group and Sub Mode)      **/
+/**	Functionality	: Set the Priority of the selected Interrupt ID at run time.                 **/
 /*================================================================================================*/
 
 
@@ -117,7 +125,13 @@ u8 MNVIC_u8GetActiveFlag (u8 Copy_u8IntNumber , u8* Copy_pu8FlagResult);
 #define NVIC_VEC_TBL_DMA2_CHANNEL2        57
 #define NVIC_VEC_TBL_DMA2_CHANNEL3        58
 #define NVIC_VEC_TBL_DMA2_CHANNEL4_5      59
+/*    Interrupt Software Priority Groups and Sub groups using SCB        */
+#define  SCB_GROUP_BITS4_SUB_BITS0           0X05FA0300 /* 4 Bit for Group and 0 Bit for Sub (IPR) => 16 Groups */
+#define  SCB_GROUP_BITS3_SUB_BITS1           0X05FA0400 /* 3 Bit for Group and 1 Bit for Sub (IPR) => 8 Groups + 2 Sub*/
+#define  SCB_GROUP_BITS2_SUB_BITS2           0X05FA0500 /* 2 Bit for Group and 2 Bit for Sub (IPR) => 4 Groups + 4 Sub*/
+#define  SCB_GROUP_BITS1_SUB_BITS3           0X05FA0600 /* 1 Bit for Group and 3 Bit for Sub (IPR) => 2 Groups + 8 Sub*/
+#define  SCB_GROUP_BITS0_SUB_BITS4           0X05FA0700 /* 0 Bit for Group and 4 Bit for Sub (IPR) => 16 Sub */
 /*########################################################################*/
 
 
-#endif
+#endif 

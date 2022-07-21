@@ -1,8 +1,8 @@
 /************************************************************************/
 /**************** Name    : Mohamed Ahmed Abdelhamid ********************/
-/**************** Date    :        30/06/2022        ********************/
+/**************** Date    :        21/07/2022        ********************/
 /**************** SWC     :          GPIO            ********************/
-/**************** Version :           1.0            ********************/
+/**************** Version :           1.2            ********************/
 /************************************************************************/
 
 #ifndef NVIC_PRIVATE_H
@@ -39,6 +39,18 @@
 #define   NVIC_IABR0      *((volatile u32*)(NVIC_BASE_ADDRESS+0x200))  /* Read Active Flag of External Interrupts from  0  to 31 */
 #define   NVIC_IABR1      *((volatile u32*)(NVIC_BASE_ADDRESS+0x204))  /* Read Active Flag of External Interrupts from  32 to 63 */
 #define   NVIC_IABR2      *((volatile u32*)(NVIC_BASE_ADDRESS+0x208))  /* Read Active Flag of External Interrupts from  64 to 80 */ 
+/*        Set the Software Priority of an Interrupt Registers            */
+#define   NVIC_IPR         ((volatile u8*)(NVIC_BASE_ADDRESS+0x300))  
+
+/*#######################################################################*/
+
+
+
+/*************************************************************************/
+/*    Interrupt Group and Subgroup Priority from SCB core peripheral     */
+/*************************************************************************/
+/*         SCB  Application Interrupt and Reset Control Register         */
+#define   SCB_AIRCR      *((volatile u32*)(0xE000ED00 + 0x0C))  
 /*#######################################################################*/
 
 #endif  
